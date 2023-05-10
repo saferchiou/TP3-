@@ -3,7 +3,7 @@ CFLAGS = -Wall -Wextra -g
 LDFLAGS =
 
 #repertoire des fichiers d'unitests teZZt.[ch]
-DIRUTEST = ../../
+DIRUTEST = ../
 
 #repertoire des fichiers communs : eltPile.[ch], eltsArbre.h pile.[ch]
 DIRCOMM = ../

@@ -11,8 +11,5 @@
  * @param [in] src l'adresse de l'element a copier
  * @param [in] dest l'adresse de la destination
  */
-// copyElt()
-// {
-// 	//TO DO
-// }
+void copyElt(eltType_pile* src,eltType_pile* dest){}
 

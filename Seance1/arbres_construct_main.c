@@ -1,18 +1,18 @@
 /**
  * program for general linked list testing
  */
-
+ 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "../pile.h"
 #include "../eltsArbre.h"
 #include "arbres_construct.h"
-#include "../../teZZt.h"
+#include "../teZZt.h"
 
 
 BEGIN_TEST_GROUP(ARBRE_CONSTRUCT)
-
+/*
 TEST(nouvCell) {
 	cell_lvlh_t *new;
 
@@ -25,7 +25,7 @@ TEST(nouvCell) {
 	free(new);
 }
 
-/*
+*/
 TEST(lirePref_fromFileName_exTP) {
 	int nbRacines = 0;
 	int nbEltsPref = 0;
@@ -50,7 +50,7 @@ TEST(lirePref_fromFileName_exTP) {
 	CHECK( 'I' == tabEltPref[nbEltsPref-1].val );
 	CHECK( 0 == tabEltPref[nbEltsPref-1].nbFils );
 }
-
+/*
 TEST(printTabEltPref_exTP) {
 	int nbRacines = 0;
 	int nbEltsPref = 0;

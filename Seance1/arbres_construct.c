@@ -4,7 +4,7 @@
  */
 #include <stdio.h>
 #include <stdlib.h>
-
+ 
 #include "../pile.h"
 #include "../eltsArbre.h"
 #include "arbres_construct.h"
@@ -15,11 +15,25 @@
  * @param [in, out] tabEltPref tableau des elements de la representation prefixee
  * @param [in, out] nbEltsPref l'adresse memoire contenant le nombre des elements du tabEltPref
  * @return le nombre de racines
- */
-//  lirePref_fromFileName()
-// {
-// // TO DO
-// }
+ */  
+int lirePref_fromFileName(char* fileName, eltPrefPostFixee_t* tabEltPref, int * nbEltsPref)
+ {
+    FILE*file = fopen(fileName,"r");
+    int i         = 0 ,
+        nbRacines = 0;
+    if (file)
+    {
+        fscanf(file,"%d",&nbRacines);
+        if (nbRacines > 0)
+             while(!feof(file))
+             {
+                fscanf(file,"%c %d",&(tabEltPref[i].val),&(tabEltPref[i].nbFils));
+                i += 1;
+             }
+    }
+    *nbEltsPref=i;
+    return (nbRacines); 
+ }
 
 /** TO DO
  * @brief afficher les elements de la representation prefixee sur un flux de sortie

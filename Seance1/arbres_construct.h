@@ -4,7 +4,7 @@
  */
 #ifndef __ARBRE_CONSTRUCT_H__
 #define __ARBRE_CONSTRUCT_H__
-
+ 
 #include "../eltsArbre.h"
 
 /** TO DO
@@ -14,8 +14,7 @@
  * @param [in, out] nbEltsPref l'adresse memoire contenant le nombre des elements du tabEltPref
  * @return le nombre de racines
  */
-// lirePref_fromFileName();
-
+int lirePref_fromFileName(char* fileName, eltPrefPostFixee_t* tabEltPref, int * nbEltsPref);
 /** TO DO
  * @brief afficher les elements de la representation prefixee sur un flux de sortie
  * @param file : le flux de sortie

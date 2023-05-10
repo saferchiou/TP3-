@@ -15,14 +15,18 @@
  *   - adrPrec : l'adresse du pointeur prec du point
  *   - nbFils_ou_Freres : le nombre de fils ou freres d'un point 
  */
-// TO DO
+typedef struct eltType_pile{
+    struct eltType_pile * adrCell;
+    struct eltType_pile * adrPrec;
+    int                   nbFils_ou_Freres;
 
+} eltType_pile;
 
 /** TO DO
  * @brief Copier la valeur d'un element dans un autre emplacement
  * @param [in] xxx l'adresse de l'element a copier
  * @param [in] xxx l'adresse de la destination
  */
-// copyElt();
+void copyElt(eltType_pile* ,eltType_pile*);
 
 #endif
