@@ -6,7 +6,7 @@
 #define __ARBRE_CONSTRUCT_H__
  
 #include "../eltsArbre.h"
-
+ 
 /** TO DO
  * @brief lire le fichier contenant la representation prefixee de l'arborescence
  * @param [in] fileName le nom du fichier contenant la representation prefixee
@@ -21,14 +21,14 @@ int lirePref_fromFileName(char* fileName, eltPrefPostFixee_t* tabEltPref, int * 
  * @param [in, out] tabEltPref tableau des elements de la representation prefixee
  * @param [in, out] nbEltsPref le nombre des elements du tabEltPref
  */
-// printTabEltPref();
+void printTabEltPref(FILE *file, eltPrefPostFixee_t *tabEltPref, int nbEltsPref);
 
 /** TO DO
  * @brief creer et initialiser un nouveau point de l'arborescence
  * @param [in] val la valeur du point de type char
  * @return l'adresse du nouveau point 
  */
-// allocPoint();
+cell_lvlh_t* allocPoint(char val) ; 
 
 /**
  * @brief construire un arbre avec lvlh a partir de representation prefixee
@@ -38,7 +38,7 @@ int lirePref_fromFileName(char* fileName, eltPrefPostFixee_t* tabEltPref, int * 
  *     - NULL si l'arbre resultatnt est vide
  *     - l'adresse de la racine de l'arbre sinon
 */
-// pref2lvlh();
+cell_lvlh_t* pref2lvlh(eltPrefPostFixee_t *tabEltPref, int nbRacines);
 
 /** TO DO
  * @brief liberer les blocs memoire d'un arbre

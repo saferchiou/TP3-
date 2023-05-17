@@ -12,7 +12,7 @@
 
 
 BEGIN_TEST_GROUP(ARBRE_CONSTRUCT)
-/*
+
 TEST(nouvCell) {
 	cell_lvlh_t *new;
 
@@ -21,11 +21,10 @@ TEST(nouvCell) {
 	CHECK( 'A' == new->val );
 	CHECK( NULL == new->lv );
 	CHECK( NULL == new->lh );
-
 	free(new);
 }
 
-*/
+
 TEST(lirePref_fromFileName_exTP) {
 	int nbRacines = 0;
 	int nbEltsPref = 0;
@@ -49,8 +48,9 @@ TEST(lirePref_fromFileName_exTP) {
 	
 	CHECK( 'I' == tabEltPref[nbEltsPref-1].val );
 	CHECK( 0 == tabEltPref[nbEltsPref-1].nbFils );
+
 }
-/*
+
 TEST(printTabEltPref_exTP) {
 	int nbRacines = 0;
 	int nbEltsPref = 0;
@@ -68,9 +68,11 @@ TEST(printTabEltPref_exTP) {
 	printTabEltPref(file, tabEltPref, nbEltsPref);
 	fclose(file);
 	CHECK( 0 == strcmp(buffer, "2 (A,3) (B,2) (E,0) (J,0) (D,0) (H,1) (G,0) (C,2) (F,3) (K,0) (M,0) (T,0) (I,0)\n") ); 
-}
+	
+} 
 
 // 2  (A,3)  (B,2)  (E,0)  (J,0)  (D,0)  (H,1) (G,0)  (C,2)  (F,3)  (K,0)  (M,0)  (T,0)  (I,0)
+
 TEST(pref2lvlh1_exTP) {
 	int nbRacines = 0;
 	int nbEltsPref = 0;
@@ -85,10 +87,18 @@ TEST(pref2lvlh1_exTP) {
 	printf("\033[0m\n");
 
 	nbRacines = lirePref_fromFileName("../pref_exTP.txt", tabEltPref, &nbEltsPref);
+    racine = pref2lvlh(tabEltPref,nbRacines) ;
 
-	// TO DO
+    REQUIRE(racine != NULL);
+	printf("gfhfhfghgfhg%c", racine->val);	
+    CHECK( 'A' == racine->val );
+	
+    CHECK( 'C' == racine->lh->val );
+	CHECK( 'B' == racine->lv->val );
+	CHECK( 'D' == racine->lv->lh->val );
+	
 }
-*/
+
 
 END_TEST_GROUP(ARBRE_CONSTRUCT)
 
