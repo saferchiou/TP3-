@@ -1,4 +1,4 @@
-/**
+/** 
  * @file eltArbre.h
  * @brief fichier d'entete pour les types de donnees d'une arborescence
  */
@@ -22,8 +22,8 @@
  */
 typedef struct eltPrefPostFixee {
     char val;
-    int nbFils;
-} eltPrefPostFixee_t ; 
+    int  nbFils;
+} eltPrefPostFixee_t; 
 
 /** TO DO
  * @struct cell_lvlh_t
@@ -35,7 +35,7 @@ typedef struct eltPrefPostFixee {
  */
 // TO DO
 typedef struct cell_lvlh {
-    char val;
+    char   val;
     struct cell_lvlh * lv;
     struct cell_lvlh * lh;
 } cell_lvlh_t; 

@@ -11,5 +11,9 @@
  * @param [in] src l'adresse de l'element a copier
  * @param [in] dest l'adresse de la destination
  */
-void copyElt(eltType_pile* src,eltType_pile* dest){}
+void copyElt(eltType_pile* src,eltType_pile* dest){
+    dest->nbFils_ou_Freres = src->nbFils_ou_Freres;
+    dest->adrCell = src->adrCell;
+    dest->adrPrec = src->adrPrec;
+}
 

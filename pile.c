@@ -1,7 +1,7 @@
 /**
  * @file pile.c
  * @brief fichier d'implementation pour la gestion de pile
- */
+ */ 
  
 #include <stdlib.h>
 #include "pile.h"
@@ -99,5 +99,4 @@ void depiler(pile_t* ptPile, eltType_pile* ptRes, int* code) {
         ptPile->sommet -= 1;
         *code = 0;
     }
-
 }

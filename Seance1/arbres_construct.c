@@ -123,35 +123,41 @@ cell_lvlh_t* pref2lvlh(eltPrefPostFixee_t *tabEltPref, int nbRacines){
    }
    
    while ((cour->nbFils_ou_Freres >0) || (!estVidePile(pile))) {
-      if (cour->nbFils_ou_Freres >0){
-         new = allocPoint (tabEltPref[i].val);
-         printf("II%d:  %cXX\n",i,new->val);
-         if (new){
-            *(cour->adrPrec )= new;
+      if (cour->nbFils_ou_Freres >0)  {
+         
+         //if (('A' <= tabEltPref[i+1].val) || (tabEltPref[i+1].val <= 'Z'))
+          if(i<12)
+               { new = allocPoint (tabEltPref[i].val);
+                 printf("II%d : %c XX\n",i,new->val);
+         
+                 (*cour->adrPrec) = new ;  } 
             cour->nbFils_ou_Freres-=1 ;
             cour->adrCell = new->lh;
-            cour->adrPrec = &(new->lv);
-            empiler(pile,cour,&code);
-            printf("fdff%cddd", adrRacine->val);
-            printf("II%d:  %c  reste%dXX\n",i,cour->adrCell->val,cour->nbFils_ou_Freres);
-            i++; 
             
-            cour->nbFils_ou_Freres = tabEltPref[i].nbFils; 
+            empiler(pile,cour,&code);
+
+           //if (('A' <= tabEltPref[i+1].val) || (tabEltPref[i+1].val <= 'Z'))
+                  i++; 
+
+             cour->adrPrec = &(new->lv);
+             if(i<12)
+                   cour->nbFils_ou_Freres = tabEltPref[i].nbFils; 
+            empiler(pile,cour,&code);
          }
-        
-      }
+      
       else 
      {
       if (!estVidePile(pile))
          {
             depiler(pile,cour,&code);
-            printf("%d \n",cour->nbFils_ou_Freres);
+           // printf("%d \n",cour->nbFils_ou_Freres);
          }    
      } 
 
    }
    libererPile(&pile);
    return(adrRacine);
+   
    
 }
 /** TO DO

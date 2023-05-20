@@ -4,7 +4,7 @@
  */
 #ifndef __ELTPILE_H__
 #define __ELTPILE_H__
-
+ 
 #include "eltsArbre.h"
 
 /** TO DO
@@ -16,9 +16,9 @@
  *   - nbFils_ou_Freres : le nombre de fils ou freres d'un point 
  */
 typedef struct eltType_pile{
-    struct eltType_pile * adrCell;
-    struct eltType_pile * adrPrec;
-    int                   nbFils_ou_Freres;
+    cell_lvlh_t *  adrCell;
+    cell_lvlh_t ** adrPrec;
+    int            nbFils_ou_Freres;
 
 } eltType_pile;
 
