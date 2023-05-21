@@ -1,4 +1,4 @@
-CC = gcc-11
+CC = gcc
 CFLAGS = -Wall -Wextra -g
 LDFLAGS =
 
@@ -9,7 +9,7 @@ DIRUTEST = ../
 DIRCOMM = ../
 
 #liste des fichiers source
-SRC = $(wildcard $(DIRCOMM)*.c *.c) #$(DIRUTEST)teZZt.c ../Seance1/arbres_construct.c
+SRC = $(wildcard $(DIRCOMM)*.c *.c)  ../Seance1/arbres_construct.c
 
 HEADERS = $(wildcard $(DIRCOMM)*.h *.h) #$(DIRUTEST)teZZt.h
 

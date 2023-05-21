@@ -90,18 +90,25 @@ TEST(pref2lvlh1_exTP) {
 	racine = pref2lvlh(tabEltPref,nbRacines) ;
      
     REQUIRE(racine != NULL);
-	printf("1erEL%c\n", racine->val);	
-    CHECK( 'A' == racine->val );
-	
-    //CHECK( 'C' == racine->lh->val );
+    CHECK( 'A' == racine->val );	
+    CHECK( 'C' == racine->lh->val );
 	CHECK( 'B' == racine->lv->val );
-	printf("2ème%c2\n",racine->lv->val) ;
-	printf("3%c3",racine->lv->lh->val) ;
-	
-	//CHECK( 'D' == racine->lv->lh->val );
+    CHECK( 'D' == racine->lv->lh->val );
+	CHECK( 'H' == racine->lv->lh->lh->val );
+	CHECK( 'E' == racine->lv->lv->val );
+	CHECK( 'J' == racine->lv->lv->lh->val );
+	CHECK( NULL == racine->lv->lv->lh->lv );
+	CHECK( NULL == racine->lv->lv->lh->lh );
+	CHECK( 'G' == racine->lv->lh->lh->lv->val );
+	CHECK( 'F' == racine->lh->lv->val );
+	CHECK( 'I' == racine->lh->lv->lh->val );
+	CHECK( 'K' == racine->lh->lv->lv->val );
+	CHECK( 'M' == racine->lh->lv->lv->lh->val );
+	CHECK( 'T' == racine->lh->lv->lv->lh->lh->val );
+	CHECK( NULL == racine->lh->lv->lv->lh->lh->lh );
+	//libererArbre(&racine);
 	
 }
-
 
 END_TEST_GROUP(ARBRE_CONSTRUCT)
 

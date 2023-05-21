@@ -82,89 +82,56 @@ void printTabEltPref(FILE *file, eltPrefPostFixee_t *tabEltPref, int nbEltsPref)
  *     - NULL si l'arbre resultatnt est vide
  *     - l'adresse de la racine de l'arbre sinon
 */
-/*
-  cell_lvlh_t * pref2lvlh(eltPrefPostFixee_t tabEltPref, int nbRacines)
- {  
-    int i =0 ; 
-    cell_lvlh_t * adrPtRacine = NULL;
-    if (nbRacines > 0)
-    {   
-        while (tabEltPref[i].val != '')
-        {  
-           new = allocPoint(tabEltPref[i].val);
-            if (new) 
-                    adrPtRacine = new ;
-            j=i
-            f = tabEltPref[i].nbFils 
-        
-           while ( f >0 )
-             {
-                i= i+1 ;
-                k=i
-                f = f-1 ; 
-                
-                adrPtRacine->lv=new ;  
-             }
-            adrPtRacine->lh=new ;
-        }
-    }
- } */
+
 cell_lvlh_t* pref2lvlh(eltPrefPostFixee_t *tabEltPref, int nbRacines){
-   pile_t       * pile   = initPile(NB_ELTPREF_MAX);
-   cell_lvlh_t  * adrRacine = (cell_lvlh_t*) malloc(sizeof(cell_lvlh_t));
-   cell_lvlh_t  * new    = NULL;
-   eltType_pile * cour = (eltType_pile*) malloc (sizeof(eltType_pile));
-   int  code= 0;
-   int i =0 ;
-   if (cour){
+   pile_t       * pile       = initPile(NB_ELTPREF_MAX);
+   cell_lvlh_t  ** adrRacine = (cell_lvlh_t**) malloc(sizeof(cell_lvlh_t*)),
+                 * new       = NULL;
+   eltType_pile  * cour      = (eltType_pile*) malloc (sizeof(eltType_pile));
+   int  code = 0,
+        i    = 0;
+   if (cour) 
+   {
       cour->nbFils_ou_Freres = nbRacines;
-      cour->adrCell =adrRacine;
-      cour->adrPrec = &adrRacine;
+      cour->adrCell = *adrRacine;
+      cour->adrPrec = adrRacine;
    }
-   
-   while ((cour->nbFils_ou_Freres >0) || (!estVidePile(pile))) {
-      if (cour->nbFils_ou_Freres >0)  {
-         
-         //if (('A' <= tabEltPref[i+1].val) || (tabEltPref[i+1].val <= 'Z'))
-          if(i<12)
-               { new = allocPoint (tabEltPref[i].val);
-                 printf("II%d : %c XX\n",i,new->val);
-         
-                 (*cour->adrPrec) = new ;  } 
-            cour->nbFils_ou_Freres-=1 ;
-            cour->adrCell = new->lh;
-            
-            empiler(pile,cour,&code);
-
-           //if (('A' <= tabEltPref[i+1].val) || (tabEltPref[i+1].val <= 'Z'))
-                  i++; 
-
-             cour->adrPrec = &(new->lv);
-             if(i<12)
-                   cour->nbFils_ou_Freres = tabEltPref[i].nbFils; 
-            empiler(pile,cour,&code);
-         }
-      
+   while ((cour->nbFils_ou_Freres >0) || (!estVidePile(pile))) 
+   {
+      if (cour->nbFils_ou_Freres >0)  
+      {
+         new = allocPoint (tabEltPref[i].val);
+         *(cour->adrPrec) = new;  
+         cour->nbFils_ou_Freres-=1 ;
+         cour->adrPrec= &(new->lh);
+         empiler(pile,cour,&code);  
+         cour->adrPrec = &(new->lv);
+         cour->nbFils_ou_Freres = tabEltPref[i].nbFils; 
+         i++; 
+      }    
       else 
-     {
-      if (!estVidePile(pile))
+      {
+         if (!estVidePile(pile)) 
          {
-            depiler(pile,cour,&code);
-           // printf("%d \n",cour->nbFils_ou_Freres);
-         }    
-     } 
-
+            depiler(pile,cour,&code);   
+         }
+      }
    }
    libererPile(&pile);
-   return(adrRacine);
-   
-   
+   return(*adrRacine);   
 }
 /** TO DO
  * @brief liberer les blocs memoire d'un arbre
  * @param [in] adrPtRacine l'adresse du pointeur de la racine d'un arbre
  */
-//  libererArbre()
-// {
-// // TO DO
-// }
+/*void libererArbre(cell_lvlh_t ** adrPtRacine)
+{
+   while (*adrPtRacine != NULL)
+   {
+      cell_lvlh_t * cour = *adrPtRacine;
+      *adrPtRacine = (cour->lv);
+      free(cour);
+      cour =NULL; 
+   }
+   
+}*/
