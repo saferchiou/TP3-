@@ -42,7 +42,7 @@ pile_t* initPile(int taille) {
 void libererPile(pile_t** adrPtPile)
  {
     if(*adrPtPile != NULL) {
-        free((*adrPtPile)->base) ;
+        free((*adrPtPile)->base);
         free(*adrPtPile);
         *adrPtPile = NULL ;    
     }

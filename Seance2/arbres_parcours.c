@@ -19,7 +19,7 @@ int getNbFils_ou_Freres(cell_lvlh_t * ptCell)
 {
     cell_lvlh_t * cour = ptCell;
     int nb = 0;
-    while (cour != NULL)
+    while (cour)
     {
         cour= cour->lh; 
         nb++; 
@@ -39,26 +39,28 @@ void printPostfixee(FILE * file, cell_lvlh_t* racine )
     cell_lvlh_t  * cour   = racine;
     eltType_pile * cp     = (eltType_pile*) malloc (sizeof(eltType_pile));
     int  code = 0;
-    cp->adrPrec =NULL;
-    cp->nbFils_ou_Freres = 0; 
-    
-    while (cour != NULL)
+    if (cp)
     {
-        while (cour->lv != NULL) 
+        cp->nbFils_ou_Freres = 0; 
+        while (cour)
         {
-            cp->adrCell= cour; 
-            empiler(pile,cp,&code);
-            cour= cour->lv;
+            while (cour->lv) // arrêt si le prochain est une feuille
+            {
+                cp->adrCell= cour; 
+                empiler(pile, cp, &code);
+                cour= cour->lv;
+            }
+            fprintf(file, "(%c,%d) ", cour->val, getNbFils_ou_Freres(cour->lv)); // écriture de la feuille
+            cour=cour->lh; // passage au frère droit 
+            while ((cour == NULL) && (!estVidePile(pile)))
+            {
+                depiler(pile,cp,&code);
+                cour=cp->adrCell; 
+                fprintf(file, "(%c,%d) ", cour->val, getNbFils_ou_Freres(cour->lv));
+                cour=cour->lh; 
+            }
         }
-        fprintf(file, "(%c,%d) ", cour->val, getNbFils_ou_Freres(cour->lv));
-        cour=cour->lh;
-        while ((cour == NULL) && (!estVidePile(pile)))
-        {
-            depiler(pile,cp,&code);
-            cour=cp->adrCell; 
-            fprintf(file, "(%c,%d) ", cour->val, getNbFils_ou_Freres(cour->lv));
-            cour=cour->lh; 
-        }
+        free(cp);
     }
     libererPile(&pile);
 }

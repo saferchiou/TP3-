@@ -1,7 +1,7 @@
 /**
  * program for general linked list testing
  */
-
+ 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -11,7 +11,7 @@
 #include "arbres_parcours.h"
 #include "../teZZt.h"
 
- 
+  
 BEGIN_TEST_GROUP(ARBRE_PARCOURS)
 
 TEST(nouvCell) {
@@ -61,10 +61,11 @@ TEST(getNbFils_ou_Freres) {
 	printf("H = %c\n", racine->lv->lh->lh->val);
 	CHECK( 1 == getNbFils_ou_Freres(racine->lv->lh->lh->lv) ); // 1 fils
 
-	//libererArbre(&racine);
+	libererArbre(&racine);
+	fclose(file);
 }
 
-TEST(printPostfixee) {
+TEST(printPostfixee1) {
 	int nbRacines = 0;
 	int nbEltsPref = 0;
 	eltPrefPostFixee_t tabEltPref[NB_ELTPREF_MAX];
@@ -74,19 +75,45 @@ TEST(printPostfixee) {
 	FILE * file = fmemopen(buffer, 1024, "w");
 	REQUIRE ( NULL != file);
 
-	printf("\033[35m\nprintPostFixee :");
+	printf("\033[35m\nprintPostFixee1 :");
+	printf("\033[0m\n");
+
+	// cas fichier vide 
+
+	nbRacines = lirePref_fromFileName("../arbreVide.txt", tabEltPref, &nbEltsPref);
+	racine = pref2lvlh(tabEltPref, nbRacines);
+
+	REQUIRE( NULL == racine );
+	printPostfixee(file, racine);
+	fprintf(file, "%d\n", nbRacines);
+	fclose(file);
+	CHECK( 0 == strcmp(buffer,"0\n") );
+	
+	libererArbre(&racine);
+}
+
+TEST(printPostfixee2) {
+	int nbRacines = 0;
+	int nbEltsPref = 0;
+	eltPrefPostFixee_t tabEltPref[NB_ELTPREF_MAX];
+	cell_lvlh_t *racine = NULL;
+	
+	char buffer[1024];
+	FILE * file = fmemopen(buffer, 1024, "w");
+	REQUIRE ( NULL != file);
+
+	printf("\033[35m\nprintPostFixee2 :");
 	printf("\033[0m\n");
 
 	nbRacines = lirePref_fromFileName("../pref_exTP.txt", tabEltPref, &nbEltsPref);
 	racine = pref2lvlh(tabEltPref, nbRacines);
 	
-	printPostfixee(stdout, racine);
 	printPostfixee(file, racine);
 	fprintf(file, "%d\n", nbRacines);
 	fclose(file);
 	CHECK( 0 == strcmp(buffer,"(E,0) (J,0) (B,2) (D,0) (G,0) (H,1) (A,3) (K,0) (M,0) (T,0) (F,3) (I,0) (C,2) 2\n") );
 	
-	//libererArbre(&racine);
+	libererArbre(&racine);
 }
 
 

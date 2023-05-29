@@ -8,7 +8,7 @@
 #include "../pile.h"
 #include "../eltsArbre.h"
 #include "arbres_insert.h"
-
+ 
 
 /**
  * @brief rechercher un point de valeur v
@@ -23,24 +23,27 @@ cell_lvlh_t* rechercher_v(cell_lvlh_t* racine, char v)
     cell_lvlh_t  * cour   = racine;
     eltType_pile * cp     = (eltType_pile*) malloc (sizeof(eltType_pile));
     int  code = 0;
-    int i=0;
-    while ((cour != NULL) && (cour->val != v))
+
+    if (cp) 
     {
-            cp->adrCell= cour; 
-            empiler(pile,cp,&code);
-            cour= cour->lv;
-        while ((cour == NULL) && (!estVidePile(pile)) && (i<15))
+        while ((cour) && (cour->val != v)) // on parcourt l'arbre tant qu'on ne trouve pas v 
         {
-            i++;
-            depiler(pile,cp,&code);
-            cour = cp->adrCell;
-            cour = cour->lh;
+            cp->adrCell = cour; 
+            empiler(pile, cp, &code); // on empile l'élément courant 
+            cour = cour->lv;         // on passe à lv 
+            while ((cour == NULL) && (!estVidePile(pile))) 
+            {
+                depiler(pile, cp, &code); 
+                cour = cp->adrCell;
+                cour = cour->lh; // on passe à lh 
+            }
         }
-    }
-    libererPile(&pile);
+        free(cp);
+    }  
+    libererPile(&pile); 
     return(cour);
 }
-
+ 
 /**
  * @brief rechercher le double prec de w dans une liste de fils
  * @param [in] adrPere l'adresse du pere
@@ -49,24 +52,12 @@ cell_lvlh_t* rechercher_v(cell_lvlh_t* racine, char v)
  */
 cell_lvlh_t** rechercherPrecFilsTries(cell_lvlh_t* adrPere, char w)
 {
-    cell_lvlh_t **  pprec = NULL;
-   // cell_lvlh_t *   new   = NULL;
-    
-        pprec = &(adrPere->lv);
-        while ((*pprec != NULL) && ((*pprec)->val < w))
-        {
-            pprec = &((*pprec)->lh);
-        }
-        /*
-        new = (cell_lvlh_t*) malloc(sizeof(cell_lvlh_t));
-        if (new)
-        {
-            new->val = w;
-            new->lv  = NULL;
-            new->lh  = *pprec;
-            *pprec   = new;
-        }
-        */
+    cell_lvlh_t **  pprec = NULL; // Même comportement qu'une liste chainée avec un pointeur pprec
+    pprec = &(adrPere->lv);  // adressage indirect de la lch des fils 
+    while ((*pprec != NULL) && ((*pprec)->val < w))
+    {
+        pprec = &((*pprec)->lh);
+    }
     return (pprec);
 }
 
@@ -79,22 +70,22 @@ cell_lvlh_t** rechercherPrecFilsTries(cell_lvlh_t* adrPere, char w)
  */
 int insererTrie(cell_lvlh_t *racine, char v, char w)
 {
-    cell_lvlh_t * pere     = rechercher_v(racine,v),
-                * new      = NULL,
-                ** pprec = NULL;
+    cell_lvlh_t *  pere     = rechercher_v(racine,v),
+                *  new      = NULL,
+                ** pprec    = NULL;
     int code = 0;
-    if (pere != NULL)
+    if (pere) // si le point auquel on va insérer existe 
     {
-        pprec = rechercherPrecFilsTries(pere,w);
-        new = (cell_lvlh_t*) malloc(sizeof(cell_lvlh_t));
+        pprec = rechercherPrecFilsTries(pere,w); // on cherche l'adr du pointeur prec apres lequel w doit etre inseree
+        new   = (cell_lvlh_t*) malloc(sizeof(cell_lvlh_t)); // on crée un nouvel élement
         if (new)
         {
             new->val = w;
             new->lv  = NULL;
             new->lh  = *pprec;
-            *pprec = new;
-            code     = 1;
-        }
-    }
-    return(code);
+            *pprec   = new; // on relie new à son précedent 
+            code     = 1; // insertion réalisée 
+        }     
+    }    
+    return(code);  
 }
