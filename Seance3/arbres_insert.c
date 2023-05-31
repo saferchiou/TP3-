@@ -13,6 +13,7 @@
 /**
  * @brief rechercher un point de valeur v
  * @param [in] racine pointeur vers la racine de l'arborescence 
+ * @param [in] v la valeur recherchee 
  * @return 
  *   - l'adresse du point contenant v si v existe dans l'arborescence
  *   - NULL, sinon

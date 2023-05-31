@@ -1,4 +1,3 @@
-
 /**
  * @file arbres_construct.c
  * @brief fichier d'implementation du programme pour la construction d'une arborescence
@@ -20,13 +19,12 @@
 int lirePref_fromFileName(char* fileName, eltPrefPostFixee_t* tabEltPref, int * nbEltsPref)
  {
     FILE *file = fopen(fileName, "r");
-    int i         = 0 ,
+    int i         = 0,
         nbRacines = 0;
     
     if (file)
-    {
-        
-        fscanf(file, "%d ", &nbRacines);
+    {    
+        fscanf(file, "%d ", &nbRacines); // on lit le nombre de racines 
         if (nbRacines > 0)
         {
              while(!feof(file))
@@ -50,6 +48,7 @@ int lirePref_fromFileName(char* fileName, eltPrefPostFixee_t* tabEltPref, int * 
 void printTabEltPref(FILE *file, eltPrefPostFixee_t *tabEltPref, int nbEltsPref)
  {  
      int i = 0; 
+
      if (nbEltsPref > 0)
      {
          if (file)
@@ -68,14 +67,16 @@ void printTabEltPref(FILE *file, eltPrefPostFixee_t *tabEltPref, int nbEltsPref)
  * @param [in] val la valeur du point
  * @return l'adresse du nouveau point 
  */
-cell_lvlh_t * allocPoint(char val) {
+cell_lvlh_t * allocPoint(char val) 
+{
    cell_lvlh_t * new = malloc(sizeof(cell_lvlh_t));
-   if (new != NULL)
-      {
-         new->val = val; 
-         new->lv = NULL;
-         new->lh = NULL; 
-      }
+
+   if (new)
+   {
+      new->val = val; 
+      new->lv  = NULL;
+      new->lh  = NULL; 
+   }
    return(new); 
 }
 
@@ -90,11 +91,11 @@ cell_lvlh_t * allocPoint(char val) {
 
 cell_lvlh_t* pref2lvlh(eltPrefPostFixee_t *tabEltPref, int nbRacines){
    pile_t        * pile      = initPile(NB_ELTPREF_MAX);
-  
    cell_lvlh_t   * new       = NULL,
                  * racine    = NULL;
    int  code = 0,
         i    = 0;
+        
    if (nbRacines >0)
    {
       cell_lvlh_t  ** adrRacine = (cell_lvlh_t**) malloc(sizeof(cell_lvlh_t*));
@@ -106,7 +107,6 @@ cell_lvlh_t* pref2lvlh(eltPrefPostFixee_t *tabEltPref, int nbRacines){
             cour->nbFils_ou_Freres = nbRacines;
             cour->adrCell = NULL;
             cour->adrPrec = adrRacine;
-         
             while ((cour->nbFils_ou_Freres >0) || (!estVidePile(pile))) 
             {
                if (cour->nbFils_ou_Freres >0)  

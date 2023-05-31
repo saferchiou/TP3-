@@ -11,7 +11,6 @@
 #include "arbres_parcours.h"
 #include "../teZZt.h"
 
-  
 BEGIN_TEST_GROUP(ARBRE_PARCOURS)
 
 TEST(nouvCell) {
@@ -26,19 +25,18 @@ TEST(nouvCell) {
 	free(new);
 } 
 
-
 TEST(getNbFils_ou_Freres) {
 	int nbRacines  = 0;
 	int nbEltsPref = 0;
 	eltPrefPostFixee_t tabEltPref[NB_ELTPREF_MAX];
 	cell_lvlh_t *racine = NULL;
 	
+	printf("\033[35m\ngetNbFils_ou_Freres :");
+	printf("\033[0m\n");
+
 	char buffer[1024];
 	FILE * file = fmemopen(buffer, 1024, "w");
 	REQUIRE ( NULL != file);
-
-	printf("\033[35m\ngetNbFils_ou_Freres :");
-	printf("\033[0m\n");
 
     nbRacines = lirePref_fromFileName("../pref_exTP.txt", tabEltPref, &nbEltsPref);
 	racine = pref2lvlh(tabEltPref, nbRacines);
@@ -61,25 +59,24 @@ TEST(getNbFils_ou_Freres) {
 	printf("H = %c\n", racine->lv->lh->lh->val);
 	CHECK( 1 == getNbFils_ou_Freres(racine->lv->lh->lh->lv) ); // 1 fils
 
-	libererArbre(&racine);
 	fclose(file);
+	libererArbre(&racine);
 }
 
 TEST(printPostfixee1) {
-	int nbRacines = 0;
+	int nbRacines  = 0;
 	int nbEltsPref = 0;
 	eltPrefPostFixee_t tabEltPref[NB_ELTPREF_MAX];
 	cell_lvlh_t *racine = NULL;
 	
+	printf("\033[35m\nprintPostFixee1 : fichier vide");
+	printf("\033[0m\n");
+
 	char buffer[1024];
 	FILE * file = fmemopen(buffer, 1024, "w");
 	REQUIRE ( NULL != file);
 
-	printf("\033[35m\nprintPostFixee1 :");
-	printf("\033[0m\n");
-
-	// cas fichier vide 
-
+	//Cas fichier vide 
 	nbRacines = lirePref_fromFileName("../arbreVide.txt", tabEltPref, &nbEltsPref);
 	racine = pref2lvlh(tabEltPref, nbRacines);
 
@@ -93,17 +90,17 @@ TEST(printPostfixee1) {
 }
 
 TEST(printPostfixee2) {
-	int nbRacines = 0;
+	int nbRacines  = 0;
 	int nbEltsPref = 0;
 	eltPrefPostFixee_t tabEltPref[NB_ELTPREF_MAX];
 	cell_lvlh_t *racine = NULL;
 	
+	printf("\033[35m\nprintPostFixee2 :");
+	printf("\033[0m\n");
+	
 	char buffer[1024];
 	FILE * file = fmemopen(buffer, 1024, "w");
 	REQUIRE ( NULL != file);
-
-	printf("\033[35m\nprintPostFixee2 :");
-	printf("\033[0m\n");
 
 	nbRacines = lirePref_fromFileName("../pref_exTP.txt", tabEltPref, &nbEltsPref);
 	racine = pref2lvlh(tabEltPref, nbRacines);

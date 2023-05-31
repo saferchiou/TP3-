@@ -10,7 +10,6 @@
 #include "arbres_construct.h"
 #include "../teZZt.h"
 
-
 BEGIN_TEST_GROUP(ARBRE_CONSTRUCT)
 
 TEST(nouvCell) {
@@ -25,30 +24,28 @@ TEST(nouvCell) {
 }
 
 TEST(lirePref_fromFileName1_exTP) {
-	int nbRacines = 0;
+	int nbRacines  = 0;
 	int nbEltsPref = 0;
 	eltPrefPostFixee_t tabEltPref[NB_ELTPREF_MAX];
 
-	printf("\033[34m\nlirePref_fromFileName1_exTP :");
+	printf("\033[34m\nlirePref_fromFileName1_exTP : fichier vide");
 	printf("\033[0m\n");
 
 	//Cas fichier vide:
 	nbRacines = lirePref_fromFileName("../arbreVide.txt", tabEltPref, &nbEltsPref); 
 	CHECK( 0 == nbRacines );
 	CHECK( 0 == nbEltsPref );
-
 }
 
-
 TEST(lirePref_fromFileName2_exTP) {
-	int nbRacines = 0;
+	int nbRacines  = 0;
 	int nbEltsPref = 0;
 	eltPrefPostFixee_t tabEltPref[NB_ELTPREF_MAX];
 
-	nbRacines = lirePref_fromFileName("../pref_exTP.txt", tabEltPref, &nbEltsPref);
-
 	printf("\033[34m\nlirePref_fromFileName2_exTP :");
 	printf("\033[0m\n");
+	
+	nbRacines = lirePref_fromFileName("../pref_exTP.txt", tabEltPref, &nbEltsPref);
 
 	CHECK( 2 == nbRacines ); 
 	CHECK( 13 == nbEltsPref );
@@ -66,67 +63,67 @@ TEST(lirePref_fromFileName2_exTP) {
 }
 
 TEST(printTabEltPref1_exTP) {
-	int nbRacines = 0;
+	int nbRacines  = 0;
 	int nbEltsPref = 0;
 	eltPrefPostFixee_t tabEltPref[NB_ELTPREF_MAX];
+
+	printf("\033[34m\nprintPref1_exTP : fichier vide");
+	printf("\033[0m\n");
 
 	char buffer[1024];
 	FILE * file = fmemopen(buffer, 1024, "w");
 	REQUIRE ( NULL != file);
 
-	printf("\033[34m\nprintPref1_exTP :");
-	printf("\033[0m\n");
-
 	//Cas fichier vide:
-
 	nbRacines = lirePref_fromFileName("../arbreVide.txt", tabEltPref, &nbEltsPref);
 	fprintf(file, "%d ", nbRacines);
 	printTabEltPref(file, tabEltPref, nbEltsPref);
 	fclose(file);
-	CHECK( 0 == strcmp(buffer, "0 ") ); 
 	
+	CHECK( 0 == strcmp(buffer, "0 ") ); 	
 } 
 
 TEST(printTabEltPref2_exTP) {
-	int nbRacines = 0;
+	int nbRacines  = 0;
 	int nbEltsPref = 0;
 	eltPrefPostFixee_t tabEltPref[NB_ELTPREF_MAX];
 
+	printf("\033[34m\nprintPref2_exTP :");
+	printf("\033[0m\n");
+	
 	char buffer[1024];
 	FILE * file = fmemopen(buffer, 1024, "w");
 	REQUIRE ( NULL != file);
-
-	printf("\033[34m\nprintPref2_exTP :");
-	printf("\033[0m\n");
 
 	nbRacines = lirePref_fromFileName("../pref_exTP.txt", tabEltPref, &nbEltsPref);
 	fprintf(file, "%d ", nbRacines);
 	printTabEltPref(file, tabEltPref, nbEltsPref);
 	fclose(file);
-	CHECK( 0 == strcmp(buffer, "2 (A,3) (B,2) (E,0) (J,0) (D,0) (H,1) (G,0) (C,2) (F,3) (K,0) (M,0) (T,0) (I,0)\n") ); 
-	
+
+	CHECK( 0 == strcmp(buffer, "2 (A,3) (B,2) (E,0) (J,0) (D,0) (H,1) (G,0) (C,2) (F,3) (K,0) (M,0) (T,0) (I,0)\n") ); 	
 } 
 
 TEST(pref2lvlh1_exTP) {
-	int nbRacines = 0;
+	int nbRacines  = 0;
 	int nbEltsPref = 0;
 	eltPrefPostFixee_t tabEltPref[NB_ELTPREF_MAX];
 	cell_lvlh_t *racine = NULL;
 	
-	printf("\033[35m\npref2lvlh1_exTP :");
+	printf("\033[35m\npref2lvlh1_exTP : fichier vide");
 	printf("\033[0m\n");
 
-	// cas fichier vide
+	//Cas fichier vide
 	nbRacines = lirePref_fromFileName("../arbreVide.txt", tabEltPref, &nbEltsPref);
 	racine = pref2lvlh(tabEltPref,nbRacines);
      
     REQUIRE( racine == NULL );
 	CHECK( 0 == nbRacines );
+
     libererArbre(&racine);
 } 
 
 TEST(pref2lvlh2_exTP) {
-	int nbRacines = 0;
+	int nbRacines  = 0;
 	int nbEltsPref = 0;
 	eltPrefPostFixee_t tabEltPref[NB_ELTPREF_MAX];
 	cell_lvlh_t *racine = NULL;
@@ -154,8 +151,10 @@ TEST(pref2lvlh2_exTP) {
 	CHECK( 'M' == racine->lh->lv->lv->lh->val );
 	CHECK( 'T' == racine->lh->lv->lv->lh->lh->val );
 	CHECK( NULL == racine->lh->lv->lv->lh->lh->lh );
+
     libererArbre(&racine);	
 } 
+
 TEST(libererArbre_exTP) {
 	int nbRacines  = 0;
 	int nbEltsPref = 0;

@@ -33,7 +33,7 @@ typedef struct eltPrefPostFixee {
  *   - lv : pointeur pour le lien vertical
  *   - lh : pointeur pour le lien horizontal
  */
-// TO DO
+
 typedef struct cell_lvlh {
     char   val;
     struct cell_lvlh * lv;

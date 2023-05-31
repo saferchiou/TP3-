@@ -9,9 +9,9 @@ DIRUTEST = ../
 DIRCOMM = ../
 
 #liste des fichiers source
-SRC = $(wildcard $(DIRCOMM)*.c *.c) #$(DIRUTEST)teZZt.c
+SRC = $(wildcard $(DIRCOMM)*.c *.c) 
 
-HEADERS = $(wildcard $(DIRCOMM)*.h *.h) #$(DIRUTEST)teZZt.h
+HEADERS = $(wildcard $(DIRCOMM)*.h *.h) 
 
 #liste des fichiers objets
 OBJ = $(SRC:%.c=%.o)

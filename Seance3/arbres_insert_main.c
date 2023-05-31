@@ -13,7 +13,6 @@
 #include "arbres_insert.h"
 #include "../teZZt.h"
 
-
 BEGIN_TEST_GROUP(ARBRE_INSERT)
 
 TEST(nouvCell) {
@@ -35,7 +34,7 @@ TEST(rechercher_v1) {
 	cell_lvlh_t *racine = NULL;
 	cell_lvlh_t *pere   = NULL;
 
-	printf("\033[35m\nrechercher_v1 :");
+	printf("\033[35m\nrechercher_v1 : fichier vide");
 	printf("\033[0m\n");
 
     // Cas arbre vide
@@ -94,6 +93,7 @@ TEST(rechercherPrecFilsTries) {
 
 	printf("\033[34m\nrechercherPrecFilsTries :");
 	printf("\033[0m\n");
+
 	nbRacines = lirePref_fromFileName("../pref_exTP.txt", tabEltPref, &nbEltsPref);
 	racine = pref2lvlh(tabEltPref, nbRacines);
 
@@ -140,7 +140,7 @@ TEST(insererTrie1) {
 	eltPrefPostFixee_t tabEltPref[NB_ELTPREF_MAX];
 	cell_lvlh_t *racine = NULL;
 	
-	printf("\033[34m\ninsererTrie1 :");
+	printf("\033[34m\ninsererTrie1 : fichier vide");
 	printf("\033[0m\n");
 	
 	// Cas arbre vide 
